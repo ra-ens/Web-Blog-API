@@ -1,7 +1,7 @@
 {
-	"name": "pharmalogy-api",
+	"name": "web-blog-api",
 	"version": "1.0.0",
-	"description": "Pharmalogy API",
+	"description": "Web Blog API",
 	"main": "index.js",
 	"scripts": {
 		"start": "node ./dist/index.js",
@@ -10,17 +10,17 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/AbdelhakimRafik/Pharmalogy-API.git"
+		"url": "git+https://github.com/AbdelhakimRafik/Web-Blog-API.git"
 	},
 	"keywords": [
-		"Pharmalogy"
+		"Web Blog API"
 	],
 	"author": "Abdelhakim RAFIK",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/AbdelhakimRafik/Pharmalogy-API/issues"
+		"url": "https://github.com/AbdelhakimRafik/Web-Blog-API/issues"
 	},
-	"homepage": "https://github.com/AbdelhakimRafik/Pharmalogy-API#readme",
+	"homepage": "https://github.com/AbdelhakimRafik/Web-Blog-API#readme",
 	"devDependencies": {
 		"del": "^6.0.0",
 		"gulp": "^4.0.2",
