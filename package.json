@@ -1,0 +1,40 @@
+{
+	"name": "pharmalogy-api",
+	"version": "1.0.0",
+	"description": "Pharmalogy API",
+	"main": "index.js",
+	"scripts": {
+		"start": "node ./dist/index.js",
+		"build": "gulp",
+		"clean": "gulp clean"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AbdelhakimRafik/Pharmalogy-API.git"
+	},
+	"keywords": [
+		"Pharmalogy"
+	],
+	"author": "Abdelhakim RAFIK",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/AbdelhakimRafik/Pharmalogy-API/issues"
+	},
+	"homepage": "https://github.com/AbdelhakimRafik/Pharmalogy-API#readme",
+	"devDependencies": {
+		"del": "^6.0.0",
+		"gulp": "^4.0.2",
+		"gulp-coffeescript": "^0.0.15",
+		"sequelize-cli": "^6.2.0"
+	},
+	"dependencies": {
+		"accesscontrol": "^2.2.1",
+		"bcrypt": "^5.0.1",
+		"cors": "^2.8.5",
+		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
+		"mysql2": "^2.2.5",
+		"sequelize": "^6.5.0",
+		"validatorjs": "^3.22.1"
+	}
+}

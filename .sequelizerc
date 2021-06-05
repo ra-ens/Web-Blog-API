@@ -1,0 +1,16 @@
+/**
+ * @author 		Abdelhakim RAFIK
+ * @version 	v1.0.1
+ * @license 	MIT License
+ * @copyright 	Copyright (c) 2021 Abdelhakim RAFIK
+ * @date 		Mar 2021
+ */
+ 
+const path = require('path');
+
+module.exports = {
+	'config':			"dist/config/sequelize_config.js",
+	'models-path':		"dist/app/models",
+	'seeders-path':		"dist/database/seeders",
+	'migrations-path':	"dist/database/migrations"
+};
