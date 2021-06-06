@@ -6,59 +6,32 @@
  * @date 		June 2021
 ###
 
-###
-	Create demo data for pharmacies
-###
+faker = require 'faker'
 
+###
+	Create demo data for user
+###
 module.exports =
 	up: (queryInterface, Sequelize) ->
 
-		# create demo data
+		# demo data container
 		demoData = []
-		cities = ["Fez","Tangier","Marrakesh","Salé","Meknes","Rabat","Oujda","Kenitra"]
-		cord = [
-				longitude: 31.6450271
-				latitude: -7.9889703
-			,
-				longitude: 31.6540752
-				latitude: -7.9955977
-			,
-				longitude: 31.6448553
-				latitude: -8.0116763
-			,
-				longitude: 31.6337242
-				latitude: -8.0137297
-			,
-				longitude: 31.6217731
-				latitude: -8.0071646
-			,
-				longitude: 31.6188537
-				latitude: -7.983246
-			,
-				longitude: 31.6181156
-				latitude: -7.9639804
-			,
-				longitude: 31.6318514
-				latitude: -7.9508216
-		]
-		i = 0
-		while i < 8
+
+		# generate data
+		for i in [0..20]
 			demoData.push
-				name: "Pharmacie #{++i}"
-				addresse: 'example city'
-				email: 'example@example.com'
-				webSite: 'example.com'
-				phone: '0524569875'
-				city: 'Marrakech'
-				country: 'Morocco'
-				longitude: cord[i-1].latitude
-				latitude: cord[i-1].longitude
-				status: 1
-				createdAt: new Date()
-				updatedAt: new Date()
+				firstName: do faker.name.firstName
+				lastName: do faker.name.lastName
+				email: do faker.internet.email
+				password: '123'
+				phone: faker.phone.phoneNumber '0#########'
+				city: do faker.address.cityName
+				country: do faker.address.country
+				role: if i is 0 then 'admin' else if i%3 is 0 then 'guest' else 'author'
+
 
 		# add data to database
-		queryInterface.bulkInsert 'Pharmacies', demoData
+		queryInterface.bulkInsert 'Users', demoData
 
 	down: (queryInterface, Sequelize) ->
 		queryInterface.dropTable 'Sale-attachments'

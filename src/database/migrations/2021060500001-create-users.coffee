@@ -35,20 +35,10 @@ module.exports =
 				type: Sequelize.STRING
 			country:
 				type: Sequelize.STRING
-			avatar:
-				type: Sequelize.INTEGER
-				references:
-					model: 'files'
-					key: 'id'
 			role:
 				allowNull: false
 				type: Sequelize.STRING
-				defaultValue: 'user'
-			pharmacy:
-				type: Sequelize.INTEGER
-				references:
-					model: 'pharmacies'
-					key: 'id'
+				defaultValue: 'guest'
 			status:
 				allowNull: false
 				type: Sequelize.BOOLEAN

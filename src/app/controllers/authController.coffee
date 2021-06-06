@@ -6,7 +6,6 @@
  * @date 		June 2021
 ###
 
-Validator 	= require 'validatorjs'
 bcrypt		= require 'bcrypt'
 jwt			= require 'jsonwebtoken'
 config 		= require '../../config'
