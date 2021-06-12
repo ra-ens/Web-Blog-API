@@ -21,9 +21,9 @@ function coffeeTask(cb) {
 }
 
 /**
- * Clean project build files
+ * Clear project build files
  */
-function clean(cb) {
+function clear(cb) {
 	(async function() {
 		await del(['./dist']);
 	})();
@@ -41,4 +41,4 @@ function watch() {
 var build = gulp.parallel(coffeeTask);
 
 exports.default = gulp.series(build, watch);
-exports.clean = clean;
+exports.clear = clear;

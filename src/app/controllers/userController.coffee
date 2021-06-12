@@ -52,7 +52,7 @@ module.exports.addUser = (req, res) ->
 ###
 module.exports.updateUser = (req, res) ->
 	# update user information
-	User.update req.body, where: id: req.parmas.id
+	User.update req.body, where: id: req.params.id
 		.then () ->
 			res.json message: "User updated successfully"
 			return
@@ -79,4 +79,4 @@ module.exports.deleteUser = (req, res) ->
 			message: "User deleted successfully"
 	else
 		res.status(500).json
-			message: "Error occured while deleting user"
+			message: "User not found"

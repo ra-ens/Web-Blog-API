@@ -10,6 +10,7 @@ path 			= require 'path'
 fs 				= require 'fs'
 { DataTypes } 	= require 'sequelize'
 { sequelize } 	= require '../../database'
+associate 		= require './_associations'
 
 # models container
 models = {}
@@ -17,7 +18,7 @@ models = {}
 # read all models directory files
 files = fs.readdirSync(__dirname).filter (file) ->
 	# exclude index file
-	return file.indexOf('.') isnt 0 and file isnt path.basename(__filename) and file.slice(-3) is '.js'
+	return file.indexOf('.') isnt 0 and file isnt path.basename(__filename) and !file.startsWith('_') and file.slice(-3) is '.js'
 
 # when error occured
 unless files
@@ -28,6 +29,9 @@ for file in files
 	# add models to models container
 	model = require(path.join __dirname, file)(sequelize, DataTypes)
 	models[model.name] = model
+
+# define associations
+associate models
 
 # export models
 module.exports = models

@@ -6,8 +6,8 @@
  * @date 		June 2021
 ###
 
-bcrypt	= require 'bcrypt'
-config 	= require '../../config'
+bcrypt		= require 'bcrypt'
+config 		= require '../../config'
 
 ###
 	User model
@@ -61,6 +61,12 @@ module.exports = (sequelize, DataTypes) ->
 				beforeCreate: (user) ->
 					# hash user password
 					user.password = bcrypt.hashSync user.password, config.bcrypt.salt
+					return
+				beforeBulkUpdate: (user) ->
+					# if changing password
+					if user.attributes.password
+						# hash user password
+						user.attributes.password = bcrypt.hashSync user.attributes.password, config.bcrypt.salt
 					return
 
 	# add password verify function to User proto

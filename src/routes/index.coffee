@@ -19,6 +19,11 @@ require('./userRouter')(privateRouter)
 # protect privateRouter with authentication middleware
 privateRouter.use authMiddleware
 
+# define 404 route
+# publicRouter.all '*', (req, res) ->
+# 	res.status(404).json
+# 		message: "Route not found"
+
 # export routers
 module.exports =
 	private: privateRouter

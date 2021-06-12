@@ -14,7 +14,7 @@ module.exports = (router) ->
 	# add new user
 	router.post '/user', userController.addUser
 
-	router.route '/user/:id'
+	router.route '/user/:id(\\d+)'
 		# return a user by given id
 		.get userController.getUserById
 		# update given user by id
