@@ -37,7 +37,7 @@ module.exports =
 				type: Sequelize.STRING
 			role:
 				allowNull: false
-				type: Sequelize.STRING
+				type: Sequelize.STRING 6
 				defaultValue: 'guest'
 			status:
 				allowNull: false

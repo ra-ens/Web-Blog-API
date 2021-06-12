@@ -7,12 +7,11 @@
 ###
 
 authController 	= require '../app/controllers/authController'
+userController 	= require '../app/controllers/userController'
 
 # export
 module.exports = (router) ->
 
-	# register route
-	router.post '/signup', authController.signup
-
+	router.post '/signup', userController.addUser
 	# login route
 	router.post '/signin', authController.signin

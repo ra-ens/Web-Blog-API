@@ -7,88 +7,76 @@
 ###
 
 { User } 	= require '../models'
-Validator 	= require 'validatorjs'
-bcrypt		= require 'bcrypt'
-config 		= require '../../config'
 
-module.exports=
+###
+	Get all users, or filtred list if offset and limit are provided
+###
+module.exports.getUsers = (req, res) ->
+	# get users from database
+	users = await User.findAll offset: req.params.offset, limit: req.params.limit
+	# return users list
+	res.json users
 
-	
-	# get user by id from database
-	getUserById: (id) ->
-		return await User.findByPk req.params.id
+###
+	Get user by id
+###
+module.exports.getUserById = (req, res) ->
+	# get user from data base with given id
+	user = await User.findByPk req.params.id
+	# return user
+	res.json user
 
-	# return all users list
-	getAllUsers: () ->
-		return do User.findAll
-	
-	# get list of users from offset
-	getUsers: (offset=0, limit=0) ->
-		return User.findAll offset: offset, limit: limit
-	
-	# get user by role
-	getUserByRole: (role) ->
-		return User.findAll where: role: role
-	
-	# get list of admins
-	getAdmins: () ->
-		return getUserByRole 'admin'
-	
-	# get list of authors
-	getAuthors: () ->
-		return getUserByRole 'author'
-	
-	# get list of guests
-	getGuests: () ->
-		return getUserByRole 'guest'
-	
-	# get user by email
-	getUserByEmail: (email) ->
-		return findOne email: email
-	
-	# add user
-	addUser: (data) ->
-		# user validation rules
-		userRules =
-			firstName: 'required|string'
-			lastName: 'required|string'
-			email: 'required|email'
-			password: 'required|min:5'
-			phone: 'size:10'
-			city: 'string'
-			country: 'string'
-
-		# validate request data
-		validation = new Validator data, userRules
-
-		# when data not validated
-		unless do validation.passes
-			res =
-				status: 400
-				message: "Data errors"
-				errors: do validation.errors.all
-				errorCount: validation.errorCount
-
-		# data are validated
-		else
-			# check if user already registred
-			user = await User.findOne where: email: data.email
-			# user not found
-			unless user
-				# hash given password
-				data.password = bcrypt.hashSync data.password, config.bcrypt.salt
-				# add user to database
-				user = await User.create data
-				# check if user created
-				if user
-					res =
-						status: 200
-						message: "User created successfully"
-			# user found
+###
+	Register a new user
+###
+module.exports.addUser = (req, res) ->
+	# add user to database
+	User.create req.body
+		.then () ->
+			# if user created successfully
+			res.json message: 'User created successfully'
+			return
+		.catch (exp) ->
+			if exp.name is 'SequelizeValidationError'
+				res.status(400).json
+					message: 'Data validation error'
+					errors: exp.errors.map (err) -> err.message
 			else
-				res =
-					status: 401
-					message: "Email already exists"
-					
-		# return respons
-		return res
+				res.staus(500).json
+					message: 'Server error occured'
+			return
+	return
+
+###
+	Update a given user data
+###
+module.exports.updateUser = (req, res) ->
+	# update user information
+	User.update req.body, where: id: req.parmas.id
+		.then () ->
+			res.json message: "User updated successfully"
+			return
+		.catch (exp) ->
+			if exp.name is 'SequelizeValidationError'
+				res.status(400).json
+					message: 'Data validation error'
+					errors: exp.errors.map (err) -> err.message
+			else
+				res.staus(500).json
+					message: 'Server error occured'
+			return	
+	return
+
+###
+	Delete user by given id
+###
+module.exports.deleteUser = (req, res) ->
+	# delete user by id
+	deleted = await User.destroy where: id: req.params.id
+	# if user deleted
+	if deleted
+		res.json
+			message: "User deleted successfully"
+	else
+		res.status(500).json
+			message: "Error occured while deleting user"

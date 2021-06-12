@@ -14,7 +14,6 @@ module.exports = (req, res, next) ->
 
 	# get token from headers
 	token = req.headers.token
-
 	# check token
 	jwt.verify token, config.jwt.secret, (err, decoded) ->
 		if err
@@ -24,9 +23,11 @@ module.exports = (req, res, next) ->
 		else
 			# check database for user
 			user = await User.findByPk decoded.id
+			# if no user with the same id found 
 			unless user
 				res.status(400).json
 					message: "Unauthorized token"
+			# if user found
 			else
 				# add user to request object
 				req.user = user

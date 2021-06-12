@@ -16,7 +16,6 @@ module.exports =
 
 		# demo data container
 		demoData = []
-
 		# generate data
 		for i in [0..20]
 			demoData.push
@@ -27,11 +26,12 @@ module.exports =
 				phone: faker.phone.phoneNumber '0#########'
 				city: do faker.address.cityName
 				country: do faker.address.country
-				role: if i is 0 then 'admin' else if i%3 is 0 then 'guest' else 'author'
-
+				role: faker.helpers.randomize ['admin', 'guest', 'author']
 
 		# add data to database
 		queryInterface.bulkInsert 'Users', demoData
+		return
 
 	down: (queryInterface, Sequelize) ->
 		queryInterface.dropTable 'Sale-attachments'
+		return
