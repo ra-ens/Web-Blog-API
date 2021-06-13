@@ -41,7 +41,6 @@ Instructions on how to use them in your own application are linked below.
 | Mysql2 | [https://www.npmjs.com/package/mysql2] |
 | JsonWebToken | [https://www.npmjs.com/package/jsonwebtoken] |
 | Bcrypt | [https://www.npmjs.com/package/bcrypt] |
-| ValidatorJS | [https://www.npmjs.com/package/validatorjs] |
 
 ## Development
 
