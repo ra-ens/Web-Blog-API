@@ -11,7 +11,7 @@
 ###
 module.exports =
 	up: (queryInterface, Sequelize) ->
-		queryInterface.createTable 'Article',
+		queryInterface.createTable 'Articles',
 			id:
 				allowNull: false
 				autoIncrement: true
@@ -26,7 +26,7 @@ module.exports =
 			image:
 				type: Sequelize.STRING
 				allowNull: false
-			user:
+			userId:
 				type: Sequelize.INTEGER
 				references:
 					model: 'users'
@@ -43,4 +43,4 @@ module.exports =
 				type: Sequelize.DATE
 
 	down: (queryInterface, Sequelize) ->
-		queryInterface.dropTable 'Article'
+		queryInterface.dropTable 'Articles'

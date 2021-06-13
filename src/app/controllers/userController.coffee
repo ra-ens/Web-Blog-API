@@ -9,7 +9,7 @@
 { User } 	= require '../models'
 
 ###
-	Get all users, or filtred list if offset and limit are provided
+	Get all users or filtred list if offset and limit are provided
 ###
 module.exports.getUsers = (req, res) ->
 	# get users from database
