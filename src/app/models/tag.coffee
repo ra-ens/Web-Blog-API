@@ -7,27 +7,17 @@
 ###
 
 ###
-	Article model
+	Tags model
 ###
 module.exports = (sequelize, DataTypes) ->
 
 	# define the model
-	sequelize.define 'Article',
-		title:
-			type: DataTypes.STRING
+	sequelize.define 'Tag',
+		name:
 			allowNull: false
-			validate:
-				isAlpha: true
-		content:
 			type: DataTypes.STRING
-			allowNull: false
 			validate:
 				isAlphanumeric: true
-		image:
-			type: DataTypes.STRING
-			allowNull: false
-			validate:
-				isUrl: true
 		status:
 			allowNull: false
 			type: DataTypes.BOOLEAN

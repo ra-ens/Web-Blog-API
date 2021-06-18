@@ -11,12 +11,12 @@ faker = require 'faker'
 ###
 	Create users demo data
 ###
-module.exports = () ->
+module.exports = (number) ->
 
 	# demo data container
 	demoData = []
 	# generate data
-	for i in [0..20]
+	for i in [0..number-1]
 		demoData.push
 			firstName: do faker.name.firstName
 			lastName: do faker.name.lastName

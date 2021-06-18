@@ -12,7 +12,7 @@ cors 	= require 'cors'
 
 config	= require './config'
 db		= require('./database')(config.db)
-routes	= require './routes'
+routes	= require('./routes')(app)
 
 # use bodyParser for requests params
 app.use express.urlencoded extended:true
@@ -22,11 +22,6 @@ app.use do express.json
 
 # enable cors polycies
 app.use do cors
-
-# set public routes
-app.use '/api', routes.public
-# set private routes
-app.use '/api', routes.private
 
 # start server
 app.listen config.server.port, ->

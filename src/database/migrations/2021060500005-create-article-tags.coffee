@@ -7,31 +7,29 @@
 ###
 
 ###
-	Create articles table migration
+	Create article-tags table migration
 ###
 module.exports =
 	up: (queryInterface, Sequelize) ->
-		queryInterface.createTable 'Articles',
+		queryInterface.createTable 'Article-tags',
 			id:
 				allowNull: false
 				autoIncrement: true
 				primaryKey: true
 				type: Sequelize.INTEGER
-			title:
-				type: Sequelize.STRING
+			articleId:
 				allowNull: false
-			content:
-				type: Sequelize.STRING
-				allowNull: false
-			image:
-				type: Sequelize.STRING
-				allowNull: false
-			userId:
 				type: Sequelize.INTEGER
 				references:
-					model: 'users'
+					model: 'Articles'
 					key: 'id'
-			published:
+			tagId:
+				allowNull: false
+				type: Sequelize.INTEGER
+				references:
+					model: 'Tags'
+					key: 'id'
+			status:
 				allowNull: false
 				type: Sequelize.BOOLEAN
 				defaultValue: true
@@ -43,4 +41,4 @@ module.exports =
 				type: Sequelize.DATE
 
 	down: (queryInterface, Sequelize) ->
-		queryInterface.dropTable 'Articles'
+		queryInterface.dropTable 'Article-tags'

@@ -7,31 +7,38 @@
 ###
 
 ###
-	Create articles table migration
+	Create comments table migration
 ###
 module.exports =
 	up: (queryInterface, Sequelize) ->
-		queryInterface.createTable 'Articles',
+		queryInterface.createTable 'Comments',
 			id:
 				allowNull: false
 				autoIncrement: true
 				primaryKey: true
 				type: Sequelize.INTEGER
-			title:
-				type: Sequelize.STRING
-				allowNull: false
-			content:
-				type: Sequelize.STRING
-				allowNull: false
-			image:
-				type: Sequelize.STRING
-				allowNull: false
-			userId:
+			parent:
+				allowNull: true
 				type: Sequelize.INTEGER
 				references:
-					model: 'users'
+					model: 'Comments'
 					key: 'id'
-			published:
+			content:
+				allowNull: false
+				type: Sequelize.STRING
+			articleId:
+				allowNull: false
+				type: Sequelize.INTEGER
+				references:
+					model: 'Articles'
+					key: 'id'
+			userId:
+				allowNull: false
+				type: Sequelize.INTEGER
+				references:
+					model: 'Users'
+					key: 'id'
+			status:
 				allowNull: false
 				type: Sequelize.BOOLEAN
 				defaultValue: true
@@ -43,4 +50,4 @@ module.exports =
 				type: Sequelize.DATE
 
 	down: (queryInterface, Sequelize) ->
-		queryInterface.dropTable 'Articles'
+		queryInterface.dropTable 'Comments'

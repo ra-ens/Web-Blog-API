@@ -8,23 +8,18 @@
 
 { Router }		= require 'express'
 authMiddleware 	= require '../app/middlewares/authMiddleware'
+
 publicRouter 	= do Router
 privateRouter 	= do Router
 
-# authentication routes
-require('./authRouter')(publicRouter)
-# user routes
-require('./userRouter')(privateRouter)
+module.exports = (app) ->
 
-# protect privateRouter with authentication middleware
-privateRouter.use authMiddleware
+	# authentication routes
+	require('./authRouter')(publicRouter)
+	# user routes
+	require('./userRouter')(privateRouter)
 
-# define 404 route
-# publicRouter.all '*', (req, res) ->
-# 	res.status(404).json
-# 		message: "Route not found"
-
-# export routers
-module.exports =
-	private: privateRouter
-	public: publicRouter
+	# set app routers
+	app.use '/api', publicRouter
+	# protect privateRouter with authentication middleware
+	app.use '/api', authMiddleware, privateRouter

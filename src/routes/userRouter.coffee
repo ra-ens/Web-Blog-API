@@ -7,14 +7,15 @@
 ###
 
 userController 	= require '../app/controllers/userController'
+checkRole		= require '../app/middlewares/roleMiddleware'
 
 # export
 module.exports = (router) ->
 
 	# add new user
-	router.post '/user', userController.addUser
+	router.post '/user', checkRole('admin'), userController.addUser
 
-	router.route '/user/:id(\\d+)'
+	router.route '/user/:id(\\d+)', checkRole('admin')
 		# return a user by given id
 		.get userController.getUserById
 		# update given user by id

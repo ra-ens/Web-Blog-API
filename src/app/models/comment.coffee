@@ -7,27 +7,26 @@
 ###
 
 ###
-	Article model
+	Comments model
 ###
 module.exports = (sequelize, DataTypes) ->
 
 	# define the model
-	sequelize.define 'Article',
-		title:
-			type: DataTypes.STRING
-			allowNull: false
-			validate:
-				isAlpha: true
+	sequelize.define 'Comment',
+		parent:
+			allowNull: true
+			type: DataTypes.INTEGER
 		content:
-			type: DataTypes.STRING
 			allowNull: false
+			type: DataTypes.STRING
 			validate:
 				isAlphanumeric: true
-		image:
-			type: DataTypes.STRING
+		articleId:
 			allowNull: false
-			validate:
-				isUrl: true
+			type: DataTypes.INTEGER
+		userId:
+			allowNull: false
+			type: DataTypes.INTEGER
 		status:
 			allowNull: false
 			type: DataTypes.BOOLEAN

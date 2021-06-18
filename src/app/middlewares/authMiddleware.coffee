@@ -11,7 +11,6 @@ config 		= require '../../config'
 { User } 	= require '../models'
 
 module.exports = (req, res, next) ->
-
 	# get token from headers
 	token = req.headers.token
 	# check token

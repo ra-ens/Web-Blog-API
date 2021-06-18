@@ -12,8 +12,18 @@
 ###
 module.exports = (Models) ->
 
-	# User has many articles
+	# User - Articles assocations
 	Models.User.hasMany Models.Article
-
-	# Article belong to one user
 	Models.Article.belongsTo Models.User
+
+	# Article - Comment
+	Models.Article.hasMany Models.Comment
+	Models.Comment.belongsTo Models.Article
+
+	# User - Comment
+	Models.User.hasMany Models.Comment
+	Models.Comment.belongsTo Models.User
+
+	# Article - Tag
+	Models.Article.belongsToMany Models.Tag, through: 'article-targs'
+	Models.Tag.belongsToMany Models.Article, through: 'article-tags'
